@@ -39,7 +39,7 @@ def post_detail(request,id=None):
     share_string=quote_plus(instance.content)
     context={
         "title":instance.title,
-        "instance":instance,
+        "object":instance,
         "share_string":share_string,
     }
     return render(request,"post_detail.html",context)    
@@ -69,8 +69,8 @@ def post_list(request):
         queryset=paginator.page(paginator.num_pages)
 
     context={
-        "title":"List",
-        "pagereqvar":pagereqvar,
+        "title":"Latest Feed",
+        "page_request_var":pagereqvar,
         "object_list":queryset
     }
     return render(request,"post_list.html",context)
