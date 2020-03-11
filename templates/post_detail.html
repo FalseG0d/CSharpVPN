@@ -10,9 +10,16 @@
     {% if instance.image %}
     <img src='{{instance.image.url}}' class='img-responsive'>
     {% endif %}
-    <h2>{{ title }}</h2><br><h3><small>Created: {{instance.timestamp}}| Updated: {{instance.update}}</small></h3>
-        {{instance.content|linebreaks}}<br>
-
+    <p>Author: {{instance.user.get_full_name}}{% if instance.draft %}<span style="color:red;">|Draft</span>{% endif %}|Created: {{instance.publish}}| Updated: {{instance.update}}</p>
+    <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div><hr>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <h2><small>{{instance.content|linebreaks}}</small></h2><br>
+        </div>
+    </div>
+    
+    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="" data-numposts="5"></div>
 </div>
 
 {% endblock content %}
