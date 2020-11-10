@@ -47,7 +47,6 @@
 
 ## Getting Started
 
-Simply Open the App or Feature you wish to learn by selecting a folder of your choosing.
 
 1. Clone the repo
 
