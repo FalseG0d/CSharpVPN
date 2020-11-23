@@ -7,6 +7,7 @@ namespace CSharpVPN
 {
     public partial class Form1 : Form
     {
+        String path;
         public Form1()
         {
             InitializeComponent();
@@ -19,27 +20,20 @@ namespace CSharpVPN
                 Process process = new Process();
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                if (radioButton1.Checked)
-                {
-                    startInfo.FileName = @"C:\Program Files\OpenVPN\bin\openvpn.exe";
-                    //Choose The Path To Required OpenVPN.exe file
-                    startInfo.Arguments = "--config server.ovpn";
-                    startInfo.Verb = "runas";
 
-                    process.StartInfo = startInfo;
-                    process.Start();
-                    MessageBox.Show("You Have Been Connected To the Server with UDP");
-                }
-                else if (radioButton2.Checked)
-                {
-                    startInfo.FileName = @"C:\Program Files\OpenVPN\bin\openvpn.exe";
-                    //Choose The Path To Required OpenVPN.exe file
-                    startInfo.Arguments = "--config server.ovpn";
-                    startInfo.Verb = "runas";
+                startInfo.FileName = @"C:\Program Files\OpenVPN\bin\openvpn.exe";
+                //Choose The Path To Required OpenVPN.exe file
+                startInfo.Arguments = "--config "+this.path;
+                startInfo.Verb = "runas";
 
-                    process.StartInfo = startInfo;
+                process.StartInfo = startInfo;
+                try
+                {
                     process.Start();
-                    MessageBox.Show("You Have Been Connected To the Server with FTP");
+                    MessageBox.Show("You Have Been Connected To the Server");
+                }catch(Exception error)
+                {
+                    MessageBox.Show("Some Error Has Occured: " , error.Message);
                 }
             }
         }
@@ -47,7 +41,7 @@ namespace CSharpVPN
         private void button2_Click(object sender, EventArgs e)
         {
             disconnect();
-            MessageBox.Show("You Have Been Disconnected From The Server.")
+            MessageBox.Show("You Have Been Disconnected From The Server.");
         }
 
         private void disconnect()
@@ -59,6 +53,25 @@ namespace CSharpVPN
                 CreateNoWindow=true,
                 UseShellExecute=false
             }).WaitForExit();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog1.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                label2.Text=openFileDialog1.FileName;
+                this.path = label2.Text;
+
+                MessageBox.Show("File Selected");
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.google.com");
         }
     }
 }
