@@ -53,7 +53,7 @@ Simply Open the App or Feature you wish to learn by selecting a folder of your c
 git clone https://github.com/FalseG0d/CSharpVPN.git
 ```
 
-2. [Configure](.\CONFIGURE.md) Your VPN Server
+2. [Configure](./CONFIGURE.md) Your VPN Server
 
 3. Run the App On Machine.
 
